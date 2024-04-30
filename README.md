@@ -6,11 +6,11 @@ the **blazingly fast** performance on this lib.
 ### Let's get started
 1. Import my lib
     ```python
-    from ExpressionParser import ExpressionParser
+    from expression_parser import SimpleParser
     ```
-2. Create the `ExpressionParser` object
+2. Create the `SimpleParser` object
     ```python
-    exprs = ExpressionParser()
+    exprs = SimpleParser()
     ```
 3. You can declare some custom variable inside your expression via callback function. **Lambda function** also accepted.
     ```python
