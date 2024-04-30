@@ -21,7 +21,7 @@ class SimpleParser:
         self.__pending_neg: bool = False
 
     def eval(self, expression: str):
-        self.__stck_build(expression)
+        self.__stck_build(str(expression))
         return self.__stck.pop()
 
     def __stck_build(self, expression: str):
