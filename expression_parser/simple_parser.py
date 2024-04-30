@@ -1,4 +1,4 @@
-class ExpressionParser:
+class SimpleParser:
     """
     The idea behind my design is...
     - if there is * and / operation, do it immediately
@@ -73,7 +73,7 @@ class ExpressionParser:
             elif ch == ')':
                 # Also parse the value
                 self.__parse_var_val()
-                # DONE: In case that inside the paranthesis has a pending_op... calculate it first
+                # DONE: In case that inside the parenthesis has a pending_op... calculate it first
                 self.__pending_op_calc()
                 # DONE: run pop_and_calc
                 # pushing is not required: since the pop_and_calc require the first element that comes from pop to be
@@ -160,13 +160,17 @@ class ExpressionParser:
         if len(self.__var_name) == 0:  # if there is no string in var_name, then there is nothing to do
             return
         try:
-            # DONE: Try to parse the value first
-            parse_val = float(self.__var_name)
+            if self.__var_name.count('.') == 0:
+                parse_val = int(self.__var_name)
+            else:
+                parse_val = float(self.__var_name)
         except ValueError:
             try:
                 parse_val = self.__known_var[self.__var_name]()
             except KeyError:
                 raise KeyError("Variable %s is not known" % self.__var_name)
+            except TypeError:
+                parse_val = self.__known_var[self.__var_name]
 
             # DONE: If the pending_neg is True, then convert to negative value
         self.__stck.append(parse_val * -1 if self.__pending_neg else parse_val)
